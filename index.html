@@ -9,6 +9,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="file.css">
 </head>
 <body>
   <header class="topbar">
@@ -30,7 +31,29 @@
       <button class="menu-card" data-go="saved">
         <span class="round-icon">⌑</span><span><strong>Mis QR</strong><small>Guardados y protegidos</small></span><b>›</b>
       </button>
-      <p class="version">Versión 0.1.1</p>
+      <button class="menu-card" data-go="shorten">
+        <span class="round-icon">↗</span><span><strong>Enlace corto</strong><small>Cambia una URL larga por un nombre fácil</small></span><b>›</b>
+      </button>
+      <p class="version">Versión 1.0.3</p>
+    </section>
+
+    <section id="shorten" class="view">
+      <div class="section-title"><button class="back" data-go="home" aria-label="Regresar">‹</button><div><h2>Enlace corto</h2><p>Crea una dirección fácil de recordar</p></div></div>
+      <form id="shortForm" class="panel">
+        <label for="longUrl">URL larga</label>
+        <input id="longUrl" class="text-input" type="url" inputmode="url" placeholder="https://ejemplo.com/ruta/muy-larga" required>
+        <label for="shortAlias">Nombre corto</label>
+        <div class="alias-row"><span id="workerPrefix">workers.dev/</span><input id="shortAlias" class="text-input" type="text" maxlength="32" pattern="[A-Za-z0-9_-]{3,32}" placeholder="invitacion" required></div>
+        <small class="field-help">Usa de 3 a 32 letras, números, guion o guion bajo.</small>
+        <p id="shortError" class="error" role="alert"></p>
+        <button id="createShort" class="primary wide" type="submit">Crear enlace corto</button>
+      </form>
+      <section id="shortResult" class="panel short-result" hidden>
+        <span class="badge">ENLACE CORTO CREADO</span>
+        <p id="shortUrlText" class="short-url"></p>
+        <div class="short-actions"><button id="copyShort" class="primary" type="button">Copiar</button><button id="openShort" class="secondary" type="button">Abrir</button></div>
+        <button id="makeShortQR" class="secondary wide" type="button">Generar QR de este enlace</button>
+      </section>
     </section>
 
     <section id="create" class="view">
@@ -38,6 +61,7 @@
       <div id="typeChooser" class="type-grid">
         <button class="type-card" data-type="text"><span>𝐓</span><strong>Texto</strong><small>Mensaje, dato o nota</small></button>
         <button class="type-card" data-type="url"><span>🔗</span><strong>URL</strong><small>Página o enlace web</small></button>
+        <button class="type-card file-card" id="openFileDialog"><span>☁</span><strong>QRFileG0</strong><small>Archivo de hasta 50 MB</small></button>
       </div>
       <form id="qrForm" class="panel" hidden>
         <label id="inputLabel" for="qrValue">Contenido</label>
@@ -62,7 +86,29 @@
     </section>
   </main>
 
+  <dialog id="fileDialog" class="file-dialog">
+    <form id="fileForm" method="dialog">
+      <div class="dialog-head"><div><h2>QRFileG0</h2><p>Sube un archivo y crea su enlace QR</p></div><button type="button" id="closeFileDialog" class="dialog-close" aria-label="Cerrar">×</button></div>
+      <label class="drop-zone" for="cloudFile"><span>☁</span><strong>Seleccionar archivo</strong><small>Máximo 50 MB</small></label>
+      <input id="cloudFile" type="file" hidden required>
+      <div id="fileDetails" class="file-details" hidden></div>
+      <div class="upload-progress" id="uploadProgress" hidden><div id="uploadBar"></div></div>
+      <p id="fileError" class="error" role="alert"></p>
+      <button id="uploadFile" class="primary wide" type="submit">Subir y generar QR</button>
+      <p class="privacy-note">El archivo se eliminará después de 24 horas, salvo que marques “Conservar” en Mis QR.</p>
+    </form>
+  </dialog>
+
+  <dialog id="qrViewer" class="qr-viewer" aria-labelledby="qrViewerTitle">
+    <button type="button" id="closeQrViewer" class="dialog-close qr-viewer-close" aria-label="Cerrar">×</button>
+    <h2 id="qrViewerTitle">Código QR</h2>
+    <div class="qr-viewer-image"><img id="qrViewerImg" alt="Código QR ampliado"></div>
+    <p id="qrViewerText"></p>
+    <small>Toca fuera de la ventana o usa la flecha Atrás para cerrar.</small>
+  </dialog>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script>
   <script src="vendor/qrcode.min.js"></script>
   <script src="vendor/jspdf.umd.min.js"></script>
   <script src="app.js"></script>
