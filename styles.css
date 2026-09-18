@@ -25,7 +25,7 @@ html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:linear-gradi
 .section-title h2{font:700 34px Georgia,serif;margin:0}
 .section-title p{color:var(--muted);margin:4px 0 0}
 .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.type-card{border:1px solid var(--gold);background:var(--light);border-radius:25px;padding:28px 14px;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:9px}
+.type-card{border:1px solid var(--gold);background:var(--light);border-radius:25px;padding:28px 14px;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;text-decoration:none;font:inherit}
 .type-card strong{font:700 23px Georgia,serif}
 .type-card small{color:var(--muted)}
 .panel{background:#fff;border:1px solid #d8c57e;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
@@ -61,16 +61,6 @@ textarea:focus{border:2px solid var(--green)}
 .empty p{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,100px);opacity:0;background:var(--deep);color:#fff;padding:12px 18px;border-radius:14px;transition:.25s;z-index:10}
 .toast.show{transform:translate(-50%,0);opacity:1}
-.text-input{width:100%;border:1px solid #b9c7c0;border-radius:15px;padding:14px;font:inherit;color:var(--ink);outline:none;margin-bottom:16px}
-.text-input:focus{border:2px solid var(--green)}
-.alias-row{display:flex;align-items:center;border:1px solid #b9c7c0;border-radius:15px;overflow:hidden;background:#f4f2e4;margin-bottom:6px}
-.alias-row span{padding-left:12px;color:var(--muted);font-size:13px;white-space:nowrap}
-.alias-row .text-input{border:0;border-radius:0;margin:0;background:#fff}
-.field-help{display:block;color:var(--muted);margin-bottom:4px}
-.short-result{text-align:center;margin-top:18px}
-.short-url{font-weight:800;color:var(--green);overflow-wrap:anywhere;font-size:18px}
-.short-actions{display:flex;gap:10px;justify-content:center}
-.short-actions button{flex:1}
 @media(max-width:520px){.shell{padding:22px 14px 32px}
 .topbar{height:76px}
 .brand{font-size:22px}
